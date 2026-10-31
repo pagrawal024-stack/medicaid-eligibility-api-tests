@@ -1,0 +1,9 @@
+# Application under test
+flask>=3.0
+pydantic>=2.6
+
+# Test framework
+pytest>=8.0
+requests>=2.31
+jsonschema>=4.21
+pytest-html>=4.1

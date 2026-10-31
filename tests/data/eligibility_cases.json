@@ -1,0 +1,145 @@
+[
+  {
+    "id": "adult_hh1_exactly_at_138pct_limit",
+    "applicant": {"age": 30},
+    "application": {"household_size": 1, "monthly_income": 1799.75, "work_hours_monthly": 80},
+    "expected": {"status": "APPROVED", "category": "ADULT", "monthly_income_limit": 1799.75,
+                 "fpl_percent": "138.00", "work_requirement": "MET", "reason_codes": []}
+  },
+  {
+    "id": "adult_hh1_one_cent_over_limit",
+    "description": "Rounds to 138.00% for display but is still over the limit: must be DENIED",
+    "applicant": {"age": 30},
+    "application": {"household_size": 1, "monthly_income": 1799.76, "work_hours_monthly": 80},
+    "expected": {"status": "DENIED", "category": "ADULT", "monthly_income_limit": 1799.75,
+                 "fpl_percent": "138.00", "work_requirement": "MET",
+                 "reason_codes": ["INCOME_OVER_LIMIT"]}
+  },
+  {
+    "id": "adult_hh4_exactly_at_limit",
+    "applicant": {"age": 42},
+    "application": {"household_size": 4, "monthly_income": 3697.25, "work_hours_monthly": 120},
+    "expected": {"status": "APPROVED", "category": "ADULT", "monthly_income_limit": 3697.25,
+                 "fpl_percent": "138.00", "work_requirement": "MET", "reason_codes": []}
+  },
+  {
+    "id": "adult_hh4_one_cent_over_limit",
+    "applicant": {"age": 42},
+    "application": {"household_size": 4, "monthly_income": 3697.26, "work_hours_monthly": 120},
+    "expected": {"status": "DENIED", "category": "ADULT", "monthly_income_limit": 3697.25,
+                 "fpl_percent": "138.00", "work_requirement": "MET",
+                 "reason_codes": ["INCOME_OVER_LIMIT"]}
+  },
+  {
+    "id": "adult_zero_income_approved",
+    "applicant": {"age": 25},
+    "application": {"household_size": 1, "monthly_income": 0, "work_hours_monthly": 80},
+    "expected": {"status": "APPROVED", "category": "ADULT", "monthly_income_limit": 1799.75,
+                 "fpl_percent": "0.00", "work_requirement": "MET", "reason_codes": []}
+  },
+  {
+    "id": "child_hh3_at_200pct_limit",
+    "applicant": {"age": 10},
+    "application": {"household_size": 3, "monthly_income": 4441.66, "work_hours_monthly": 0},
+    "expected": {"status": "APPROVED", "category": "CHILD", "monthly_income_limit": 4441.66,
+                 "fpl_percent": "200.00", "work_requirement": "NOT_APPLICABLE", "reason_codes": []}
+  },
+  {
+    "id": "child_hh3_one_cent_over_limit",
+    "applicant": {"age": 10},
+    "application": {"household_size": 3, "monthly_income": 4441.67, "work_hours_monthly": 0},
+    "expected": {"status": "DENIED", "category": "CHILD", "monthly_income_limit": 4441.66,
+                 "fpl_percent": "200.00", "work_requirement": "NOT_APPLICABLE",
+                 "reason_codes": ["INCOME_OVER_LIMIT"]}
+  },
+  {
+    "id": "pregnant_hh2_at_200pct_no_work_requirement",
+    "applicant": {"age": 27, "pregnant": true},
+    "application": {"household_size": 2, "monthly_income": 3525.00, "work_hours_monthly": 0},
+    "expected": {"status": "APPROVED", "category": "PREGNANT", "monthly_income_limit": 3525.00,
+                 "fpl_percent": "200.00", "work_requirement": "NOT_APPLICABLE", "reason_codes": []}
+  },
+  {
+    "id": "aged_hh1_at_100pct_limit",
+    "applicant": {"age": 70},
+    "application": {"household_size": 1, "monthly_income": 1304.16, "work_hours_monthly": 0},
+    "expected": {"status": "APPROVED", "category": "AGED", "monthly_income_limit": 1304.16,
+                 "fpl_percent": "100.00", "work_requirement": "NOT_APPLICABLE", "reason_codes": []}
+  },
+  {
+    "id": "aged_hh1_one_cent_over_limit",
+    "applicant": {"age": 70},
+    "application": {"household_size": 1, "monthly_income": 1304.17, "work_hours_monthly": 0},
+    "expected": {"status": "DENIED", "category": "AGED", "monthly_income_limit": 1304.16,
+                 "fpl_percent": "100.00", "work_requirement": "NOT_APPLICABLE",
+                 "reason_codes": ["INCOME_OVER_LIMIT"]}
+  },
+  {
+    "id": "age_boundary_turns_19_on_application_date_is_adult",
+    "applicant": {"date_of_birth": "2007-07-01"},
+    "application": {"household_size": 1, "monthly_income": 2000.00, "work_hours_monthly": 80},
+    "expected": {"status": "DENIED", "category": "ADULT", "monthly_income_limit": 1799.75,
+                 "fpl_percent": "153.35", "work_requirement": "MET",
+                 "reason_codes": ["INCOME_OVER_LIMIT"]}
+  },
+  {
+    "id": "age_boundary_one_day_before_19th_birthday_is_child",
+    "applicant": {"date_of_birth": "2007-07-02"},
+    "application": {"household_size": 1, "monthly_income": 2000.00, "work_hours_monthly": 0},
+    "expected": {"status": "APPROVED", "category": "CHILD", "monthly_income_limit": 2608.33,
+                 "fpl_percent": "153.35", "work_requirement": "NOT_APPLICABLE", "reason_codes": []}
+  },
+  {
+    "id": "age_boundary_turns_65_on_application_date_is_aged",
+    "applicant": {"date_of_birth": "1961-07-01"},
+    "application": {"household_size": 1, "monthly_income": 1304.16, "work_hours_monthly": 0},
+    "expected": {"status": "APPROVED", "category": "AGED", "monthly_income_limit": 1304.16,
+                 "fpl_percent": "100.00", "work_requirement": "NOT_APPLICABLE", "reason_codes": []}
+  },
+  {
+    "id": "work_requirement_79_hours_not_met",
+    "applicant": {"age": 40},
+    "application": {"household_size": 1, "monthly_income": 1000.00, "work_hours_monthly": 79},
+    "expected": {"status": "DENIED", "category": "ADULT", "monthly_income_limit": 1799.75,
+                 "fpl_percent": "76.68", "work_requirement": "NOT_MET",
+                 "reason_codes": ["WORK_REQUIREMENT_NOT_MET"]}
+  },
+  {
+    "id": "work_requirement_exactly_80_hours_met",
+    "applicant": {"age": 40},
+    "application": {"household_size": 1, "monthly_income": 1000.00, "work_hours_monthly": 80},
+    "expected": {"status": "APPROVED", "category": "ADULT", "monthly_income_limit": 1799.75,
+                 "fpl_percent": "76.68", "work_requirement": "MET", "reason_codes": []}
+  },
+  {
+    "id": "work_requirement_exempt_disabled",
+    "applicant": {"age": 40, "disabled": true},
+    "application": {"household_size": 1, "monthly_income": 1000.00, "work_hours_monthly": 0},
+    "expected": {"status": "APPROVED", "category": "ADULT", "monthly_income_limit": 1799.75,
+                 "fpl_percent": "76.68", "work_requirement": "EXEMPT", "reason_codes": []}
+  },
+  {
+    "id": "work_requirement_exempt_caregiver",
+    "applicant": {"age": 33, "caregiver_child_under_14": true},
+    "application": {"household_size": 2, "monthly_income": 1500.00, "work_hours_monthly": 0},
+    "expected": {"status": "APPROVED", "category": "ADULT", "monthly_income_limit": 2432.25,
+                 "fpl_percent": "85.11", "work_requirement": "EXEMPT", "reason_codes": []}
+  },
+  {
+    "id": "not_state_resident",
+    "applicant": {"age": 30, "state_resident": false},
+    "application": {"household_size": 1, "monthly_income": 1000.00, "work_hours_monthly": 80},
+    "expected": {"status": "DENIED", "category": "ADULT", "monthly_income_limit": 1799.75,
+                 "fpl_percent": "76.68", "work_requirement": "MET",
+                 "reason_codes": ["NOT_STATE_RESIDENT"]}
+  },
+  {
+    "id": "all_four_denial_reasons_in_order",
+    "applicant": {"age": 30, "state_resident": false, "citizen_or_qualified": false},
+    "application": {"household_size": 2, "monthly_income": 5000.00, "work_hours_monthly": 10},
+    "expected": {"status": "DENIED", "category": "ADULT", "monthly_income_limit": 2432.25,
+                 "fpl_percent": "283.69", "work_requirement": "NOT_MET",
+                 "reason_codes": ["NOT_STATE_RESIDENT", "CITIZENSHIP_NOT_VERIFIED",
+                                  "INCOME_OVER_LIMIT", "WORK_REQUIREMENT_NOT_MET"]}
+  }
+]

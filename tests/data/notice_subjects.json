@@ -1,0 +1,14 @@
+{
+  "APPROVAL_NOTICE": {
+    "en": "Your Medicaid application has been approved",
+    "es": "Su solicitud de Medicaid ha sido aprobada",
+    "hi": "आपका मेडिकेड आवेदन स्वीकृत हो गया है",
+    "zh": "您的医疗补助申请已获批准"
+  },
+  "DENIAL_NOTICE": {
+    "en": "Your Medicaid application has been denied",
+    "es": "Su solicitud de Medicaid ha sido denegada",
+    "hi": "आपका मेडिकेड आवेदन अस्वीकार कर दिया गया है",
+    "zh": "您的医疗补助申请未获批准"
+  }
+}

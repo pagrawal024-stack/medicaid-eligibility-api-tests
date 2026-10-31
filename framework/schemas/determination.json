@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Determination",
+  "type": "object",
+  "required": ["application_id", "status", "category", "age_at_application", "fpl_percent",
+               "monthly_income_limit", "work_requirement", "reason_codes", "determined_at"],
+  "additionalProperties": false,
+  "properties": {
+    "application_id": {"type": "integer", "minimum": 1},
+    "status": {"enum": ["APPROVED", "DENIED"]},
+    "category": {"enum": ["CHILD", "PREGNANT", "ADULT", "AGED"]},
+    "age_at_application": {"type": "integer", "minimum": 0},
+    "fpl_percent": {"type": "string", "pattern": "^\\d+\\.\\d{2}$"},
+    "monthly_income_limit": {"type": "number", "minimum": 0},
+    "work_requirement": {"enum": ["MET", "NOT_MET", "EXEMPT", "NOT_APPLICABLE"]},
+    "reason_codes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"enum": ["NOT_STATE_RESIDENT", "CITIZENSHIP_NOT_VERIFIED",
+                         "INCOME_OVER_LIMIT", "WORK_REQUIREMENT_NOT_MET"]}
+    },
+    "determined_at": {"type": "string"}
+  }
+}

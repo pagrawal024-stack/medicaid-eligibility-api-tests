@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NoticeList",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "application_id", "template_code", "language", "channel",
+                 "recipient", "subject", "created_at"],
+    "additionalProperties": false,
+    "properties": {
+      "id": {"type": "integer", "minimum": 1},
+      "application_id": {"type": "integer", "minimum": 1},
+      "template_code": {"enum": ["APPROVAL_NOTICE", "DENIAL_NOTICE"]},
+      "language": {"enum": ["en", "es", "hi", "zh"]},
+      "channel": {"enum": ["EMAIL", "SMS"]},
+      "recipient": {"type": "string", "minLength": 1},
+      "subject": {"type": "string", "minLength": 1},
+      "created_at": {"type": "string"}
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Application",
+  "type": "object",
+  "required": ["id", "applicant_id", "household_size", "monthly_income",
+               "work_hours_monthly", "application_date", "status", "determination"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type": "integer", "minimum": 1},
+    "applicant_id": {"type": "integer", "minimum": 1},
+    "household_size": {"type": "integer", "minimum": 1, "maximum": 20},
+    "monthly_income": {"type": "number", "minimum": 0},
+    "work_hours_monthly": {"type": "integer", "minimum": 0},
+    "application_date": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+    "status": {"enum": ["PENDING", "APPROVED", "DENIED"]},
+    "determination": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "required": ["status", "category", "fpl_percent", "monthly_income_limit",
+                       "work_requirement", "reason_codes", "determined_at"],
+          "properties": {
+            "status": {"enum": ["APPROVED", "DENIED"]},
+            "category": {"enum": ["CHILD", "PREGNANT", "ADULT", "AGED"]},
+            "fpl_percent": {"type": "string", "pattern": "^\\d+\\.\\d{2}$"},
+            "monthly_income_limit": {"type": "number"},
+            "work_requirement": {"enum": ["MET", "NOT_MET", "EXEMPT", "NOT_APPLICABLE"]},
+            "reason_codes": {"type": "array", "items": {"type": "string"}},
+            "determined_at": {"type": "string"}
+          }
+        }
+      ]
+    }
+  }
+}
